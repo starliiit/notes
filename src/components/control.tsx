@@ -27,7 +27,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         setPlaying(!playing)
     }
 
-    const label = playing ? `停止` : `开始`
+    const label = playing ? `STOP` : `START`
 
     return (
         <div style={{
@@ -37,7 +37,9 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
                 <span style={{ marginRight: '4px', fontSize: '18px' }}>{`bpm`}</span>
                 <InputNumber onChange={onChange} size="large" defaultValue="60" />
             </span>
-            <Button onClick={onClick} size="large">{label}</Button>
+            <Button onClick={onClick} size="large" style={{
+                width: '90px'
+            }}>{label}</Button>
         </div>
     )
 }
