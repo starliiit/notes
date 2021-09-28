@@ -35,9 +35,9 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         }}>
             <span style={{ margin: '8px' }}>
                 <span style={{ marginRight: '4px', fontSize: '18px' }}>{`bpm`}</span>
-                <InputNumber onChange={onChange} size='large' />
+                <InputNumber onChange={onChange} size="large" defaultValue="60" />
             </span>
-            <Button onClick={onClick} size='large'>{label}</Button>
+            <Button onClick={onClick} size="large">{label}</Button>
         </div>
     )
 }

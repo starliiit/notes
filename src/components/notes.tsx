@@ -60,7 +60,7 @@ export const Notes: React.FC<{ bpm: number, playing: Boolean }> = ({ bpm, playin
             ...CSSCenterFlex(),
         }}>
             <span className={className} style={{
-                fontSize: '60px',
+                fontSize: '120px',
             }}>{note}</span>
         </div>
     )
