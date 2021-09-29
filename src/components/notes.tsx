@@ -23,45 +23,83 @@ function generateNote(): string {
     return sample(notes)
 }
 
+function generateKey(): string {
+    return Math.random().toString(36).substr(2, 5)
+}
+
 function bpmToInterval(bpm: number): number {
     return Math.floor(60 * 1000 / bpm)
 }
 
 const ANIMATTION_ENTER = `animate__animated animate__fadeIn`
-const ANIMATION_EXIT = `animate__animated animate__fadeOut`
 
-export const Notes: React.FC<{ bpm: number, playing: Boolean }> = ({ bpm, playing }) => {
-    const [note, setNote] = useState<string>(generateNote())
-    const [className, setClassName] = useState<string>(``)
-    const interval = bpmToInterval(bpm)
 
-    function refreshNote() {
-        setNote(generateNote())
-        setClassName(ANIMATTION_ENTER)
-        setTimeout(() => {
-            setClassName(ANIMATION_EXIT)
-        }, interval / 2)
-    }
-
-    useEffect(() => {
-        if (playing) {
-            const timerId = setInterval(refreshNote, interval)
-            return function cleanup() {
-                clearInterval(timerId)
-            }
-        }
-    })
-
+const PlayerBox: React.FC = ({ children }) => {
     return (
         <div style={{
             width: '40vw',
             height: '40vh',
             backgroundColor: 'skyblue',
             ...CSSCenterFlex(),
+            fontSize: '120px',
         }}>
-            <span className={className} style={{
+            {children}
+        </div>
+    )
+}
+
+
+const Note: React.FC<{ note: string }> = ({ note }) => {
+    // const [className, setClassName] = useState<string>(ANIMATTION_ENTER)
+
+    return (
+        <PlayerBox>
+            <span className={ANIMATTION_ENTER} style={{
                 fontSize: '120px',
             }}>{note}</span>
-        </div>
+        </PlayerBox>
+    )
+}
+
+const Playing: React.FC<{ bpm: number }> = ({ bpm }) => {
+    const [note, setNote] = useState<string>(generateNote())
+    const [key, setKey] = useState<string>(generateKey())
+    const interval = bpmToInterval(bpm)
+
+    function refreshNote() {
+        setNote(generateNote())
+        setKey(generateKey())
+    }
+
+    useEffect(() => {
+        const timerId = setInterval(refreshNote, interval)
+        return function cleanup() {
+            clearInterval(timerId)
+        }
+    })
+
+    return (
+        <Note key={key} note={note} />
+    )
+}
+
+const Paused: React.FC = () => {
+    const msg = `PAUSED`
+
+    return (
+        <PlayerBox>
+            <span>{msg}</span>
+        </PlayerBox>
+    )
+}
+
+export const Player: React.FC<{ bpm: number, playing: Boolean }> = ({ bpm, playing }) => {
+    if (playing) {
+        return (
+            <Playing bpm={bpm} />
+        )
+    }
+    return (
+        <Paused />
     )
 }

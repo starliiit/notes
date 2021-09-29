@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ControlPanel } from "./control"
-import { Notes } from "./notes"
+import { Player } from "./notes"
 
 export const Page: React.FC = () => {
     const [bpm, setBpm] = useState<number>(40)
@@ -10,7 +10,7 @@ export const Page: React.FC = () => {
         <div style={{
 
         }}>
-            <Notes bpm={bpm} playing={playing} />
+            <Player bpm={bpm} playing={playing} />
             <ControlPanel setBpm={setBpm} playing={playing} setPlaying={setPlaying} />
         </div>
     )
