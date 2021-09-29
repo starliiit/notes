@@ -18,11 +18,26 @@ export const Content: React.FC = ({ children }) => {
   )
 }
 
+const Header: React.FC = () => {
+  return (
+    <div style={{
+      fontFamily: 'Centaur',
+      fontStyle: 'oblique',
+      fontSize: '48px',
+      color: '#397BBE',
+      marginBottom: '12px',
+    }}>
+      <span>la nota</span>
+    </div>
+  )
+}
+
 
 function App() {
   return (
     <div className="App">
       <Content>
+        <Header />
         <Page />
       </Content>
     </div>
