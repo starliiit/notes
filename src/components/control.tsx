@@ -32,13 +32,15 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
     return (
         <div style={{
             ...CSSCenterFlex('row'),
+            marginTop: '16px',
         }}>
             <span style={{ margin: '8px' }}>
-                <span style={{ marginRight: '4px', fontSize: '18px' }}>{`bpm`}</span>
+                <span style={{ marginRight: '8px', fontSize: '18px' }}>{`bpm`}</span>
                 <InputNumber onChange={onChange} size="large" defaultValue="60" />
             </span>
             <Button onClick={onClick} size="large" style={{
-                width: '90px'
+                marginLeft: '12px',
+                width: '90px',
             }}>{label}</Button>
         </div>
     )

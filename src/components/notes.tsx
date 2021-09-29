@@ -57,6 +57,8 @@ const Note: React.FC<{ note: string }> = ({ note }) => {
         <PlayerBox>
             <span className={ANIMATTION_ENTER} style={{
                 fontSize: '120px',
+                fontFamily: 'Georgia',
+                color: '#2860B4',
             }}>{note}</span>
             <audio src={audioPath} autoPlay />
         </PlayerBox>
@@ -90,7 +92,10 @@ const Paused: React.FC = () => {
 
     return (
         <PlayerBox>
-            <span>{msg}</span>
+            <span style={{
+                fontFamily: 'Lucida Console',
+                color: '#F2569C',
+            }}>{msg}</span>
         </PlayerBox>
     )
 }
