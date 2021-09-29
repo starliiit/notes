@@ -1,3 +1,4 @@
+import { join } from "path"
 import { CSSProperties, useEffect, useState } from "react"
 
 
@@ -50,13 +51,14 @@ const PlayerBox: React.FC = ({ children }) => {
 
 
 const Note: React.FC<{ note: string }> = ({ note }) => {
-    // const [className, setClassName] = useState<string>(ANIMATTION_ENTER)
+    const audioPath = join(process.env.PUBLIC_URL, `assets/${note}.mp3`)
 
     return (
         <PlayerBox>
             <span className={ANIMATTION_ENTER} style={{
                 fontSize: '120px',
             }}>{note}</span>
+            <audio src={audioPath} autoPlay />
         </PlayerBox>
     )
 }
@@ -94,9 +96,12 @@ const Paused: React.FC = () => {
 }
 
 export const Player: React.FC<{ bpm: number, playing: Boolean }> = ({ bpm, playing }) => {
+
     if (playing) {
         return (
-            <Playing bpm={bpm} />
+            <>
+                <Playing bpm={bpm} />
+            </>
         )
     }
     return (
